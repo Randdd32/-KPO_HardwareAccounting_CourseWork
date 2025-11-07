@@ -17,21 +17,23 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true, exclude = {"deviceModels", "structureElementModels"})
+@EqualsAndHashCode(callSuper = true, exclude = "locations")
 @Entity
-@Table(name = "manufacturer")
-public class ManufacturerEntity extends BaseEntity {
+@Table(name = "building")
+public class BuildingEntity extends BaseEntity {
     @Check(constraints = "length(name) >= 1")
     @Column(nullable = false, unique = true, length = 50)
     private String name;
 
-    @OneToMany(mappedBy = "manufacturer", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<DeviceModelEntity> deviceModels = new HashSet<>();
+    @Check(constraints = "length(address) >= 1")
+    @Column(nullable = false)
+    private String address;
 
-    @OneToMany(mappedBy = "manufacturer", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<StructureElementModelEntity> structureElementModels = new HashSet<>();
+    @OneToMany(mappedBy = "building", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<LocationEntity> locations = new HashSet<>();
 
-    public ManufacturerEntity(String name) {
+    public BuildingEntity(String name, String address) {
         this.name = name;
+        this.address = address;
     }
 }

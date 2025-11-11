@@ -8,7 +8,9 @@ import com.hardware.hardware_structure.web.dto.entity.DeviceModelDto;
 import com.hardware.hardware_structure.web.dto.entity.LocationDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
+@Configuration
 public class MapperConfiguration {
     @Bean
     ModelMapper modelMapper() {
